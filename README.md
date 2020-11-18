@@ -1,47 +1,11 @@
-# Template: template-ros
+This repository contains several controllers, which are designed to run on a duckiebot with the daffy configuration.
 
-This template provides a boilerplate repository
-for developing ROS-based software in Duckietown.
+#1 PID-Controller
+A simple PID controller, uses a weighted sum of distance to center and heading angle as error term. Reference for both are zero (driving at the center of the lane, heading parallel to the lane)
 
-**NOTE:** If you want to develop software that does not use
-ROS, check out [this template](https://github.com/duckietown/template-basic).
+#2 Cascade-PID-Controller
+For the outer loop, use distance to lanecenter to compute reference angle and use this, to compute output from the heading angle and the reference angle. The innerloop uses a linear extrapolation to approximate the current angle, as the inner loop has a higher frequency, then the lane-filter-node, which provides the position values.
 
+#3 PurePursuit
 
-## How to use it
-
-### 1. Fork this repository
-
-Use the fork button in the top-right corner of the github page to fork this template repository.
-
-
-### 2. Create a new repository
-
-Create a new repository on github.com while
-specifying the newly forked template repository as
-a template for your new repository.
-
-
-### 3. Define dependencies
-
-List the dependencies in the files `dependencies-apt.txt` and
-`dependencies-py3.txt` (apt packages and pip packages respectively).
-
-
-### 4. Place your code
-
-Place your code in the directory `/packages/` of
-your new repository.
-
-
-### 5. Setup launchers
-
-The directory `/launchers` can contain as many launchers (launching scripts)
-as you want. A default launcher called `default.sh` must always be present.
-
-If you create an executable script (i.e., a file with a valid shebang statement)
-a launcher will be created for it. For example, the script file 
-`/launchers/my-launcher.sh` will be available inside the Docker image as the binary
-`dt-launcher-my-launcher`.
-
-When launching a new container, you can simply provide `dt-launcher-my-launcher` as
-command.
+#4 PolePlacement
