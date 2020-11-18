@@ -27,11 +27,11 @@ class ControllerNode(DTROS):
         #rospy.init_node("lane_controller_node", anonymous=False)
 
         # Subscriptions
-        self.sub_seg = rospy.Subscriber("marschla/ground_projection/lineseglist_out", SegmentList, self.process_segments, queue_size=1,dt_topic_type=TopicType.CONTROL)
+        self.sub_seg = rospy.Subscriber("marschla/lane_filter_node/seglist_filtered", SegmentList, self.process_segments, queue_size=1)
         
         #self.sub_pose = rospy.Subscriber(str(os.environ['VEHICLE_NAME'])+"/lane_filter_node/lane_pose", LanePose ,self.updatepose ,queue_size = 1)
         # Publication
-        self.pub_wheels_cmd = rospy.Publisher("marschla/wheels_driver_node/wheels_cmd", WheelsCmdStamped, queue_size=1)
+        self.pub_wheels_cmd = rospy.Publisher("marschla/wheels_driver_node/wheels_cmd", WheelsCmdStamped, queue_size=1,dt_topic_type=TopicType.CONTROL)
 
         # Stop on shutdown
         rospy.on_shutdown(self.custom_shutdown)

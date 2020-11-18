@@ -17,7 +17,8 @@ dt-launchfile-init
 #dt-exec roslaunch my_package nodeCascade1.launch
 #dt-exec roslaunch my_package nodePole_place.launch
 #dt-exec roslaunch my_package nodePurePursuit.launch
-dt-exec roslaunch my_package nodeCascade2.launch
+dt-exec roslaunch my_package nodePurePursuit2.launch
+#dt-exec roslaunch my_package nodeCascade2.launch
 
 # ----------------------------------------------------------------------------
 # YOUR CODE ABOVE THIS LINE
