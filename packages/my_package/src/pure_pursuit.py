@@ -4,7 +4,7 @@ import os
 import rospy
 from duckietown.dtros import DTROS, NodeType, TopicType
 from std_msgs.msg import String, Bool
-from duckietown_msgs.msg import Twist2DStamped, WheelsCmdStamped, LanePose
+from duckietown_msgs.msg import Twist2DStamped, WheelsCmdStamped, LanePose, SegmentList
 import numpy as np
 import time
 import math
@@ -27,7 +27,7 @@ class ControllerNode(DTROS):
         #rospy.init_node("lane_controller_node", anonymous=False)
 
         # Subscriptions
-        self.sub_seg = rospy.Subscriber("marschla/lane_filter_node/seglist_filtered", SegmentList, self.process_segments, queue_size=1)
+        self.sub_seg = rospy.Subscriber("marschla/ground_projection/lineseglist_out", SegmentList, self.process_segments, queue_size=1)
         
         #self.sub_pose = rospy.Subscriber(str(os.environ['VEHICLE_NAME'])+"/lane_filter_node/lane_pose", LanePose ,self.updatepose ,queue_size = 1)
         # Publication
@@ -52,6 +52,8 @@ class ControllerNode(DTROS):
 
     def process_segments(self, input_segment_list):
         all_segments = input_segment_list.segments # this is a list of type Segment
+
+        rospy.loginfo("Hallo from sub")
 
         lookahead = 0.25
         tol = 0.05
@@ -198,7 +200,8 @@ class ControllerNode(DTROS):
             '''
 
             # Send the command to the car
-            self.pub_wheels_cmd.publish(car_cmd_msg)
+            #self.pub_wheels_cmd.publish(car_cmd_msg)
+            #rospy.loginfo("omega = %s" % self.omega)
             
             rate.sleep()
 

@@ -33,7 +33,7 @@ class ControllerNode(DTROS):
 
         self.pub_car_cmd.publish(stop_msg)
         rospy.sleep(0.5)
-        rospy.loginfo("Shutdown complete oder?")
+        rospy.loginfo("Shutdown complete oder?????????")
 
     def process_segments(self, input_segment_list):
         all_segments = input_segment_list.segments # this is a list of type Segment
@@ -146,9 +146,19 @@ class ControllerNode(DTROS):
         # Send the command to the car
         self.pub_car_cmd.publish(car_control_msg)
 
+    def run(self):
+        rate = rospy.Rate(10) 
+
+        while  not rospy.is_shutdown():
+
+            rospy.loginfo("Hi-----Hi")
+            rate.sleep()
+
 if __name__ == '__main__':
-    try:
-        lane_controller_node = ControllerNode(node_name='lane_controller_node')
-        rospy.spin()
-    except rospy.ROSInterruptException:
-        pass
+
+    #rospy.loginfo("Hallo from the start")
+    lane_controller_node = ControllerNode(node_name='lane_controller_node')
+
+    #lane_controller_node.run()
+
+    rospy.spin()

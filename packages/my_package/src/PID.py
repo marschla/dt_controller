@@ -164,6 +164,8 @@ class ControllerNode(DTROS):
 
 if __name__ == "__main__":
     # Initialize the node
+    #rospy.loginfo("Hello from the start")
+
     lane_controller_node = ControllerNode(node_name='lane_controller_node')
 
     lane_controller_node.run()
